@@ -98,7 +98,7 @@ class CharMat(object):
 
 
 
-C=CharMat(5)
-C.set_word("teap",(0,0),(3,3))
-C.fill_characters_randomly("gz")
-C.term_display()
+# C=CharMat(5)
+# C.set_word("teap",(0,0),(3,3))
+# C.fill_characters_randomly("gz")
+# C.term_display()
