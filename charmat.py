@@ -87,17 +87,18 @@ class CharMat(object):
 				self.chararray[i]= string[randint(0,len(string)-1)]
 	def term_display(self):
 		"""display matrix on terminal"""
+		print self.n,"*",self.n, "puzzle"
 		for i in range(self.n):
 			for j in range(self.n):
 				print self.chararray[j+i*self.n],
 			print " "
 
-			
+
 # HOW TO USE IT
 
 
 
-# C=CharMat(5)
-# C.set_word("teap",(0,0),(3,3))
-# C.fill_characters_randomly("gz")
-# C.term_display()
+C=CharMat(5)
+C.set_word("teap",(0,0),(3,3))
+C.fill_characters_randomly("gz")
+C.term_display()
