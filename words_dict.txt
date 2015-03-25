@@ -1,0 +1,20 @@
+0 0 6 3 2 3 1
+cat 3
+dog 3
+bat 3
+car 3
+dam 3
+tar 3
+love 4
+ball 4
+lion 4
+madam 5
+tiger 5
+rabbit 6
+ballon 6
+carton 6
+balloon 7
+
+
+
+
