@@ -1,0 +1,8 @@
+*.pyc
+*.out
+*.log
+*.aux
+*.nav
+*.toc
+*.synctex.gz
+*.snm
