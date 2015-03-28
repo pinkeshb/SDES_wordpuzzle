@@ -1,0 +1,17 @@
+0 0 7 2 3 3 1 0 0 0 0 0 0 0 0
+bat
+cat
+car
+dog
+dam
+lal
+tar
+ball
+lion
+tiger
+madam
+aalrs
+ballon
+rabbit
+carton
+balloon
