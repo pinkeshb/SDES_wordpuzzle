@@ -60,18 +60,23 @@ class TestMatrix_superimpose(unittest.TestCase):
 		self.assertEqual(wl.matrix_superimpose(self.matrix,[1,1],[1,0],2),[[0,1,1],[0,1,0],[1,1,0]])
 class TestwordList_setPosition(unittest.TestCase):
 	def setUp(self):
-		self.sport=wl.word_list(2,3,6)
-		self.sport.single_fetch_word("words_out.txt")
-		self.sport.set_position()
 		self.inc=[[-1,0],[-1,1],[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1]]
+		while(True):
+			self.sport=wl.word_list(2,3,6)
+			self.sport.single_fetch_word("words_out.txt")
+			self.matrix=self.sport.set_position()
+			
+			if self.sport.success==True:
+				break
 	def tearDown(self):
 		pass
 
 	def test_set_positions_no_intersection(self):
+		
 		pos=[]
 		[i,j]=self.sport.position[0]
 		dir0 = self.sport.direction[0]
-		for i in range(self.sport.length[0]):
+		for k in range(self.sport.length[0]):
 			pos.append([i,j])
 			i,j=i+self.inc[dir0][0],j+self.inc[dir0][1]
 		[i,j]=self.sport.position[1]
@@ -79,6 +84,39 @@ class TestwordList_setPosition(unittest.TestCase):
 		for i1 in range(self.sport.length[1]):
 			self.assertFalse([i,j] in pos)
 			i,j=i+self.inc[dir1][0],j+self.inc[dir1][1]
+	def test_set_positions_no_intersection1(self):
+		''' if it does notoverlap, sum of 1's in matrix is equal to the sum of lengths of words'''
+		sum1=0
+		for i in xrange(self.sport.matrix_size):
+			sum1+=sum(self.matrix[i])
+		self.assertEqual(sum1, sum(self.sport.length))
+
+class TestwordList_setPosition1(unittest.TestCase):
+	def setUp(self):
+		self.inc=[[-1,0],[-1,1],[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1]]
+		iter1=0
+		while(True):
+			self.sport=wl.word_list(8,6,6) #no. of words, len, matrix size #Error comes, if legth of word is bigger than the size of matrix in line 62
+			self.sport.single_fetch_word("words_out.txt")
+			self.matrix=self.sport.set_position()
+			iter1+=1
+			if self.sport.success==True:
+				break
+			if iter1>10:# then  the test cases below should not be ran.
+				print 'The puzzle cannot be generated with this size'
+				break
+
+	def tearDown(self):
+		pass
+
+	def test_set_positions_no_intersection1(self):
+		''' if it does notoverlap, sum of 1's in matrix is equal to the sum of lengths of words'''
+		if self.sport.success==False:
+				return
+		sum1=0
+		for i in xrange(self.sport.matrix_size):
+			sum1+=sum(self.matrix[i])
+		self.assertEqual(sum1, sum(self.sport.length))
 
 
 	

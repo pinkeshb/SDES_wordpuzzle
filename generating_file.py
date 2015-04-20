@@ -1,4 +1,6 @@
 def generating_file(rfile,wfile):
+	'''Generates a file with words in increasing order of length
+	their count's w.r.t  length are printed in 1st line'''
 	fout=open(wfile,"w+")
 	count=15*[0]
 	buckets=[]

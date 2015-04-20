@@ -1,0 +1,7 @@
+Notes regarding Program Implementation
+
+19th april
+Completed the test, level 1 diffculty , Working prorperly. Clearly tested by counting 1's
+Itera-20 for a single word, Itera-10 for new set of words and trying to position them. When 20*10 fails, we cannot generate the word_positions
+
+
