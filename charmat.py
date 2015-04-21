@@ -60,7 +60,7 @@ class CharMat(object):
         return "".join(word)
 
     def set_word(self, word, (x_start, y_start), (x_end, y_end)):
-        """set word in matrix form start to end coordinates 
+        """set word in matrix from start to end coordinates 
         after checking validity of coordinates
         """
           # validity check
@@ -116,7 +116,17 @@ class CharMat(object):
     def get_char(self, (x, y)):
         """return character corresponding to x and y"""
         return self.char_array[x + y*self.n]
-
+    def set_all_words(self,word_list):
+        """set word in matrix from start to end coordinates 
+        after checking validity of coordinates
+        """
+        for i in range(len(word_list.words)):
+            word=word_list.words[i]
+            x_start=word_list.position[i][0]
+            y_start=word_list.position[i][1]
+            x_end=x_start+(len(word)-1)*word_list.direction[i][0]
+            y_end=y_start+(len(word)-1)*word_list.direction[i][1]
+            self.set_word(word, (x_start, y_start), (x_end, y_end))
 # HOW TO USE IT
 
 
