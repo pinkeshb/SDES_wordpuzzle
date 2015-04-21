@@ -1,0 +1,3 @@
+1.http://bryanhelmig.com/python-crossword-puzzle-generator/ ---- for the pyhton code and detailed explanation by Brian Helmig
+2. http://stackoverflow.com/questions/6332652/a-fast-algorithm-for-creating-a-puzzle ---- for other possible algorithm suggestions
+
