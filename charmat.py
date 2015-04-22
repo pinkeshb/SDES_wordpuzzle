@@ -29,34 +29,35 @@ class CharMat(object):
         if x_start == x_end:
             if y_start < y_end:
                 for i in range(y_start, y_end + 1):
-                    word.append(self.char_array[x_start + i * self.n])
+                    word.append(self.get_char((x_start,i)))
+                print "".join(word),"charm"
                 return "".join(word)
 
             else:
-                for i in range(y_start, y_end + 1):
-                    word.append(self.char_array[x_start + i * self.n])
-                    word.reverse()
+                for i in range(y_end, y_start + 1):
+                    word.append(self.get_char((x_start,i)))
+                word.reverse()
+                print "".join(word),"charm"
                 return "".join(word)
         if y_start == y_end:
             if x_start < x_end:
                 for i in range(x_start, x_end + 1):
-                    word.append(self.char_array[y_start * self.n + i])
+                    word.append(self.get_char((i,y_start)))
+                print "".join(word),"charm"
                 return "".join(word)
             else:
-                for i in range(x_start, x_end + 1):
-                    word.append(self.char_array[y_start * self.n + i])
-                    word.reverse()
+                for i in range(x_end, x_start + 1):
+                    word.append(self.get_char((i,y_start)))
+                word.reverse()
+                print "".join(word),"charm"
                 return "".join(word)
 
          # diagonal words
         if not(abs(x_start - x_end) == abs(y_start - y_end)):
             raise ValueError
         for i in range(abs(x_start - x_end) + 1):
-            word.append(self.char_array[
-                (x_start + i*(x_end-x_start) / abs(x_end-x_start))   + 
-                (y_start + i*(y_end-y_start) / abs(y_end-y_start)) * self.n
-                ])
-
+            word.append(self.get_char((x_start + i*(x_end-x_start) / abs(x_end-x_start),y_start + i*(y_end-y_start) / abs(y_end-y_start))))
+        print "".join(word),"charm"
         return "".join(word)
 
     def set_word(self, word, (x_start, y_start), (x_end, y_end)):
@@ -120,13 +121,16 @@ class CharMat(object):
         """set word in matrix from start to end coordinates 
         after checking validity of coordinates
         """
+        direction_inc=[[-1,0],[-1,1],[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1]]
         for i in range(len(word_list.words)):
             word=word_list.words[i]
-            x_start=word_list.position[i][0]
-            y_start=word_list.position[i][1]
-            x_end=x_start+(len(word)-1)*word_list.direction[i][0]
-            y_end=y_start+(len(word)-1)*word_list.direction[i][1]
-            self.set_word(word, (x_start, y_start), (x_end, y_end))
+            x_start=word_list.position[i][1]
+            y_start=word_list.position[i][0]
+            x_end=x_start+(len(word)-1)*direction_inc[word_list.direction[i]][1]
+            y_end=y_start+(len(word)-1)*direction_inc[word_list.direction[i]][0]
+            # print x_end,y_end
+            # print y_start,y_end
+            self.set_word(word.upper(), (x_start, y_start), (x_end, y_end))
 # HOW TO USE IT
 
 

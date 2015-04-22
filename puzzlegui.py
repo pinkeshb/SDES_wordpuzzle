@@ -11,7 +11,8 @@ import pygame,sys
 
 # from gset letter_block_size=50
 # calculated from letter block size #Word_block_size=100
-def start(char_mat):#Gset,Gstat
+def start(gstat):#Gset,gstat
+    char_mat=gstat.char_mat
     BLACK = (  0,   0,   0)
     WHITE = (255, 255, 255)
     RED = (255,   0,   0)
@@ -30,8 +31,8 @@ def start(char_mat):#Gset,Gstat
     # word block size at bottom
     hight_words=Word_block_size
 
-    width=2*width_frame+width_mat
-    hight=2*hight_frame+hight_mat+hight_words
+    width=2*width_frame+width_mat+hight_words
+    hight=2*hight_frame+hight_mat
     #generating the display
     pygame.init()
     DISPLAYSURF = pygame.display.set_mode((width,hight))
@@ -48,6 +49,8 @@ def start(char_mat):#Gset,Gstat
     # 	set DISPLAYSURF with C and W and G
     # for every character do this
     fontObj = pygame.font.Font('freesansbold.ttf', int(letter_block_size*0.5))
+    fontObjMessage = pygame.font.Font('freesansbold.ttf',letter_block_size*2)
+    fontObjwords = pygame.font.Font('freesansbold.ttf',letter_block_size)
     for i in range(char_mat.n):
         for j in range(char_mat.n):
                 c=char_mat.get_char((i,j))
@@ -55,6 +58,13 @@ def start(char_mat):#Gset,Gstat
                 textRectObj = textSurfaceObj.get_rect()
                 textRectObj.center = (letter_block_size*(3/2.0+i), letter_block_size*(3/2.0+j))
                 DISPLAYSURF.blit(textSurfaceObj, textRectObj)
+    y=0
+    for w in gstat.word_list.words:
+        textSurfaceObj = fontObjwords.render(w, True, BLACK)
+        textRectObj = textSurfaceObj.get_rect()
+        textRectObj.center = (letter_block_size*(char_mat.n+3), letter_block_size*(3/2.0+y))
+        DISPLAYSURF.blit(textSurfaceObj, textRectObj)
+        y=y+1
     # c='a'
     # textSurfaceObj = fontObj.render(c, True, BLACK)
     # textRectObj = textSurfaceObj.get_rect()
@@ -70,8 +80,17 @@ def start(char_mat):#Gset,Gstat
 
     start = False
     while True: # main game loop
+
         for event in pygame.event.get():
     # mouse drag and select
+            time = pygame.time.get_ticks()
+            if time>gstat.time:
+                gstat.check_word((-1,-1),(-1,-1))
+            if gstat.times_up:
+                textSurfaceObj = fontObjMessage.render("Time's Up!  \n Close Game!", True, BLUE)
+                textRectObj = textSurfaceObj.get_rect()
+                textRectObj.center = (letter_block_size*(3/2.0+char_mat.n/2), letter_block_size*(3/2.0+char_mat.n/2))
+                DISPLAYSURF.blit(textSurfaceObj, textRectObj)
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == LEFT:        
             	if valid(event.pos,width_mat,hight_mat,width_frame,hight_frame):
                     P_1=convert(event.pos,width_frame,hight_frame,letter_block_size)
@@ -97,11 +116,30 @@ def start(char_mat):#Gset,Gstat
 
             		# highlight
             		# time.sleep(0.1sec)
-            	   	# G.check_word(P_2,P_1)
-            	   	# if check G.success
-            	   	# 	display success and time left
-            	   	# if check G.timeout
-            	   	# 	display score and time out
+                    gstat.check_word(P_1,P_2)
+                    print gstat.word_list.found
+                    y=0
+                    for w in gstat.word_list.words:
+                        if gstat.word_list.found[y]:
+                            colour_word=WHITE
+                        else:
+                            colour_word=BLACK
+                        textSurfaceObj = fontObjwords.render(w, True, colour_word)
+                        textRectObj = textSurfaceObj.get_rect()
+                        textRectObj.center = (letter_block_size*(char_mat.n+3), letter_block_size*(3/2.0+y))
+                        DISPLAYSURF.blit(textSurfaceObj, textRectObj)
+                        y=y+1
+                    if gstat.success:
+            	   		# display success and time left
+                        textSurfaceObj = fontObjMessage.render("You Won!", True, BLUE)
+                        textRectObj = textSurfaceObj.get_rect()
+                        textRectObj.center = (letter_block_size*(3/2.0+char_mat.n/2), letter_block_size*(1/2.0))
+                        DISPLAYSURF.blit(textSurfaceObj, textRectObj)
+                        textSurfaceObj = fontObjMessage.render("Close Game!", True, BLUE)
+                        textRectObj = textSurfaceObj.get_rect()
+                        textRectObj.center = (letter_block_size*(3/2.0+char_mat.n/2), letter_block_size*(3/2.0+char_mat.n/2))
+                        DISPLAYSURF.blit(textSurfaceObj, textRectObj)
+
             	   	# update the display (Display_copy,G.W,)
 
         	# if bool ==True 
