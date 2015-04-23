@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import puzzlegui
 import charmat
 import word_list,gamestatus
@@ -9,7 +11,7 @@ print word_list.words
 print word_list.position
 print word_list.direction
 char_mat.set_all_words(word_list)
-char_mat.term_display()
+# char_mat.term_display()
 char_mat.fill_characters_randomly("z")	
 
 gstat=gamestatus.GameStatus(word_list,char_mat)	
