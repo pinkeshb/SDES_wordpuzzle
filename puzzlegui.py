@@ -13,8 +13,9 @@ GRAY = (200,200,200)
 LEFT=1
 letter_block_size=26
 Word_block_size=100
-current_start=0
-current_end=0
+w_start,w_end=(0,0),(0,0)
+# current_start=0
+# current_end=0
 
 # getting the parameters
 
@@ -95,7 +96,7 @@ def start(gstat):#Gset,gstat
 
                         # highlight_char
                         # time.sleep(0.1sec)
-                        gstat.check_word(P_1,P_2)
+                        gstat.check_word( w_start,w_end)
                         print gstat.word_list.found
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -208,13 +209,13 @@ def start(gstat):#Gset,gstat
         output_string = "Time left: {0:02}:{1:02}".format(minutes, seconds)
          
         # Blit to the screen
-        text = font.render(output_string, True, BLACK)
+        text = font.render(output_string, True, GREEN)
          
         DISPLAYSURF.blit(text, [letter_block_size, 0])
         output_string = "Score: " + str(gstat.score)
          
         # Blit to the screen
-        text = font.render(output_string, True, BLACK)
+        text = font.render(output_string, True, GREEN)
          
         DISPLAYSURF.blit(text, [letter_block_size*7, 0])
         # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
@@ -245,7 +246,7 @@ def get_sticky(current_start,current_end):
     else:
         w_end=[0,0]
         slope = norm_end_y/float(norm_end_x)
-        print slope
+        # print slope
         if abs(slope) in [0,1]:
             w_end=current_end
         else:
