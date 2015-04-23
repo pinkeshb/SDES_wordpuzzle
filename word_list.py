@@ -83,7 +83,14 @@ class word_list(object):
 			self.success=True
 		return matrix
 			#it will stay false, if 20 itearaions had failed for a word
-
+	def get_start_end_xy(self,i):
+	    """returns start and end coordinates of i_th word in words(list)"""
+	    direction_inc=[[-1,0],[-1,1],[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1]]
+	    x_start=self.position[i][1]
+	    y_start=self.position[i][0]
+	    x_end=x_start+(len(self.words[i])-1)*direction_inc[self.direction[i]][1]
+	    y_end=y_start+(len(self.words[i])-1)*direction_inc[self.direction[i]][0]
+	    return (x_start,y_start),(x_end,y_end)
 def find_quadrant(x,y,n):
 	'''Finds the quadrant , in which the given point x,y lies
 	returns: 0,1,2,3 (quadrant no.)'''

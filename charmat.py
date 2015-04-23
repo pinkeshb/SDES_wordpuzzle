@@ -121,16 +121,10 @@ class CharMat(object):
         """set word in matrix from start to end coordinates 
         after checking validity of coordinates
         """
-        direction_inc=[[-1,0],[-1,1],[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1]]
         for i in range(len(word_list.words)):
-            word=word_list.words[i]
-            x_start=word_list.position[i][1]
-            y_start=word_list.position[i][0]
-            x_end=x_start+(len(word)-1)*direction_inc[word_list.direction[i]][1]
-            y_end=y_start+(len(word)-1)*direction_inc[word_list.direction[i]][0]
-            # print x_end,y_end
-            # print y_start,y_end
-            self.set_word(word.upper(), (x_start, y_start), (x_end, y_end))
+            word=word_list.words[i].upper()
+            start,end=word_list.get_start_end_xy(i)
+            self.set_word(word, start,end)
 # HOW TO USE IT
 
 
