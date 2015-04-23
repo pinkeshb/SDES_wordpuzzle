@@ -20,6 +20,7 @@ current_end=0
 
 # from gset letter_block_size=50
 # calculated from letter block size #Word_block_size=100
+w_start,w_end=(0,0),(0,0)
 def start(gstat):#Gset,gstat
     char_mat=gstat.char_mat
 
@@ -95,7 +96,7 @@ def start(gstat):#Gset,gstat
 
                         # highlight_char
                         # time.sleep(0.1sec)
-                        gstat.check_word(P_1,P_2)
+                        gstat.check_word(w_start,w_end)
                         print gstat.word_list.found
             if event.type == pygame.QUIT:
                 pygame.quit()
