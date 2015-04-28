@@ -1,3 +1,7 @@
 1.http://bryanhelmig.com/python-crossword-puzzle-generator/ ---- for the pyhton code and detailed explanation by Brian Helmig
 2. http://stackoverflow.com/questions/6332652/a-fast-algorithm-for-creating-a-puzzle ---- for other possible algorithm suggestions
 
+wxModule - for GUI
+http://wiki.wxpython.org/Getting%20Started#CA-dc4450fdc4337dac8fdb3a5c34544bdb5885e165_1- used this for mainly
+http://zetcode.com/wxpython/-- but this also has easy to understand manual with sample codes
+

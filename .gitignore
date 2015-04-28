@@ -8,3 +8,5 @@ spike_*.*
 *.synctex.gz
 *.snm
 *.swp
+data/
+pgu/

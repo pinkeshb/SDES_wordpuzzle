@@ -2,7 +2,7 @@ import random
 from operator import itemgetter
 
 class word_list(object):
-	def __init__(self,count,maxl,n):
+	def __init__(self,maxl,count,n):
 		'''words, length, position, direction in self are in respective order. that is first len, dir, position corresponds to  first word,  eg. cat, 3 , 0,0 , 2'''
 		self.words=[]
 		self.length=[]
@@ -32,6 +32,17 @@ class word_list(object):
 		for j in range(self.count):
 			self.words.append(wordspace.pop(random.randrange(0,countnum-j)))# while popping, for next time randrange limit should be decreased
 		self.length=map(len,self.words)
+	def  set_position_level(self,level):
+		'''generates the postions for the words, for differnet levels
+		'''  
+		self.level=level
+		if level==0:
+			self.set_position()
+		if level==1:
+			self.set_position()
+		if level==2:
+			self.set_position()
+	
 	def set_position(self):
 		'''generates the postions for the words
 		''' 
