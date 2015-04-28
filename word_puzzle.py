@@ -5,6 +5,7 @@ import charmat
 import word_list,gamestatus
 import options_gui
 import game_settings
+
 level,dictionary,grid_size=options_gui.start_setup()
 game_set=game_settings.game_settings(level,dictionary,grid_size)
 # char_mat=charmat.CharMat()

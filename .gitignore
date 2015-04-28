@@ -10,3 +10,11 @@ spike_*.*
 *.swp
 data/
 pgu/
+
+Makefile
+conf.py
+index.rst
+make.bat
+templates/
+static/
+build/
