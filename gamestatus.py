@@ -31,10 +31,12 @@ class GameStatus(object):
 
 
 
-            if user_selected_word in self.word_list.words and self.word_list.found[self.word_list.words.index(user_selected_word)]==False:
+            if user_selected_word in self.word_list.words and self.word_list.\
+                found[self.word_list.words.index(user_selected_word)]==False:
 
                 self.score=self.score+10
-                self.word_list.found[self.word_list.words.index(user_selected_word)]=True
+                self.word_list.found[self.word_list.words.\
+                                                index(user_selected_word)]=True
                 if not(False in self.word_list.found):
                     self.success=True
         # self.char_mat.term_display()

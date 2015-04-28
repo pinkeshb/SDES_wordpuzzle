@@ -20,7 +20,8 @@ def generating_file(rfile,wfile):
 	fout.write(' '.join(map(str,count))+'\n')
 	for j in range(15):
 		for k in range(0,len(buckets[j])):
-			# fout.write(buckets[j][k]+' '+str(j+1)+'\n')#storre sthe length of word at the end of the line
+			# fout.write(buckets[j][k]+' '+str(j+1)+'\n')
+			#storre sthe length of word at the end of the line
 			fout.write(buckets[j][k]+'\n')
 	fout.close()
 
