@@ -1,6 +1,7 @@
 # grid size is not intputted from user. but default of 8 is used
 import wx
 class ExamplePanel(wx.Panel):
+    """This is the panel has Dictionary, Level, Grid size widgets"""
     def __init__(self, parent,app):
         wx.Panel.__init__(self, parent)
         self.level=0
@@ -8,18 +9,11 @@ class ExamplePanel(wx.Panel):
         self.grid_size=12
         self.app=app
         self.quote = wx.StaticText(self, label="Hi !! You have to find a set of english words embedded in n by n matrix of characters.", pos=(20, 30), size=(375,300), style=wx.TE_MULTILINE | wx.TE_READONLY )
-        # A multiline TextCtrl - This is here to show how the events work in this program, don't pay too much attention to it
-        #self.logger = wx.TextCtrl(self, pos=(300,20), size=(200,300), style=wx.TE_MULTILINE | wx.TE_READONLY)
         # A button
         self.button =wx.Button(self, label="Start", pos=(150, 320))
         self.Bind(wx.EVT_BUTTON, self.OnClick,self.button)
-        # the edit control - one line version.
-        #self.lblname = wx.StaticText(self, label="Your name :", pos=(20,60))
-        #self.editname = wx.TextCtrl(self, value="Enter here your name", pos=(150, 60), size=(140,-1))
-        #self.Bind(wx.EVT_TEXT, self.EvtText, self.editname)
-        #self.Bind(wx.EVT_CHAR, self.EvtChar, self.editname)
         # the combobox Control
-        self.sampleList = ['Animals', 'FootBall Stars', 'Movie Names']
+        self.sampleList = ['Animals', 'Car Brands']
         self.lblhear = wx.StaticText(self, label="Choose the Topic", pos=(20, 90))
 
         self.edithear = wx.ComboBox(self, pos=(20, 120), size=(150, -1), choices=self.sampleList, style=wx.CB_DROPDOWN)# in pos(column,row)
@@ -29,11 +23,8 @@ class ExamplePanel(wx.Panel):
 
         self.edithear1 = wx.ComboBox(self, pos=(20, 200), size=(150, -1), choices=['8 x 8', '12 x 12'], style=wx.CB_DROPDOWN)# in pos(column,row)
         self.Bind(wx.EVT_COMBOBOX, self.EvtComboBox1, self.edithear1)
-        #self.Bind(wx.EVT_TEXT, self.EvtText,self.edithear)
+        
 
-        # Checkbox
-        #self.insure = wx.CheckBox(self, label="Do you want Insured Shipment ?", pos=(20,180))
-        #self.Bind(wx.EVT_CHECKBOX, self.EvtCheckBox, self.insure)
         # Radio Boxes
         radioList = ['Easy', 'Medium', 'Hard']
         rb = wx.RadioBox(self, label="Difficulty Level", pos=(20, 250), choices=radioList,  majorDimension=3,
@@ -41,11 +32,11 @@ class ExamplePanel(wx.Panel):
         self.Bind(wx.EVT_RADIOBOX, self.EvtRadioBox, rb)
 
     def EvtRadioBox(self, event):
-        #self.logger.AppendText('EvtRadioBox: %d\n' % event.GetInt())
+        
         self.level=event.GetInt()
     def EvtComboBox(self, event):
         self.dictionary=event.GetString()        
-        #self.logger.AppendText('EvtComboBox: %s\n' % event.GetString())
+        
     def EvtComboBox1(self, event):
         temp=event.GetString()
         self.grid_size=int(temp[0])
@@ -55,15 +46,8 @@ class ExamplePanel(wx.Panel):
         
         self.app.ExitMainLoop()
         self.Close(True)
-        #self.logger.AppendText(" Click on object with Id %d\n" %event.GetId())
-    #def EvtText(self, event):
-    #    self.logger.AppendText('EvtText: %s\n' % event.GetString())
-    #def EvtChar(self, event):
-    #   self.logger.AppendText('EvtChar: %d\n' % event.GetKeyCode())
-    #  event.Skip()
-    #def EvtCheckBox(self, event):
-    #    self.logger.AppendText('EvtCheckBox: %d\n' % event.Checked())
-
+        
+    
 class myFrame(wx.Frame):
 
     def __init__(self, parent,window_name,app): 
@@ -90,5 +74,5 @@ def start_setup():
     frame.Show()
     app.MainLoop()
     frame.Close(True)
-    return frame.mypanel.level, frame.mypanel.dictionary, frame.mypanel.grid_size
+    return frame.mypanel.level, frame.mypanel.dictionary, frame.mypasnel.grid_size
     

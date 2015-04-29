@@ -7,7 +7,7 @@ class game_settings(object):
 		self.word_block_size=100
 		self.params=[]
 	def calc_parameters(self):
-		self.params=[[(6,8),(8,12),(8,12)],[(8,8),(10,12),(10,12)]]#word length, no of ords, 
+		self.params=[[(6,6),(8,8),(8,8)],[(8,8),(10,12),(10,12)]]#word length, no of ords, 
 		if self.matrix_size==8:
 			row_index=0
 		else:
