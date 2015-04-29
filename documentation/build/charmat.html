@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>charmat module &mdash; Word-Puzzle 1.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Word-Puzzle 1.0.1 documentation" href="index.html" />
+    <link rel="up" title="List of Modules" href="modules.html" />
+    <link rel="next" title="wordlist module" href="word_list.html" />
+    <link rel="prev" title="List of Modules" href="modules.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="word_list.html" title="wordlist module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="List of Modules"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Word-Puzzle 1.0.1 documentation</a> &raquo;</li>
+          <li><a href="modules.html" accesskey="U">List of Modules</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="charmat-module">
+<h1>charmat module<a class="headerlink" href="#charmat-module" title="Permalink to this headline">¶</a></h1>
+<p>Holds matrix and get and set word and random fill
+function.</p>
+<span class="target" id="module-charmat"></span><dl class="class">
+<dt id="charmat.CharMat">
+<em class="property">class </em><tt class="descclassname">charmat.</tt><tt class="descname">CharMat</tt><big>(</big><em>n=15</em><big>)</big><a class="headerlink" href="#charmat.CharMat" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="charmat.CharMat.fill_characters_randomly">
+<tt class="descname">fill_characters_randomly</tt><big>(</big><em>string</em><big>)</big><a class="headerlink" href="#charmat.CharMat.fill_characters_randomly" title="Permalink to this definition">¶</a></dt>
+<dd><p>fills all the spaces in matrix with randomly selected 
+characters form string</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="charmat.CharMat.get_char">
+<tt class="descname">get_char</tt><big>(</big><em>(x</em>, <em>y)</em><big>)</big><a class="headerlink" href="#charmat.CharMat.get_char" title="Permalink to this definition">¶</a></dt>
+<dd><p>return character corresponding to x and y</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="charmat.CharMat.get_word">
+<tt class="descname">get_word</tt><big>(</big><em>(x_start</em>, <em>y_start)</em>, <em>(x_end</em>, <em>y_end)</em><big>)</big><a class="headerlink" href="#charmat.CharMat.get_word" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns word from matrix form start to end coordinates 
+after checking validity of coordinates</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="charmat.CharMat.set_all_words">
+<tt class="descname">set_all_words</tt><big>(</big><em>word_list</em><big>)</big><a class="headerlink" href="#charmat.CharMat.set_all_words" title="Permalink to this definition">¶</a></dt>
+<dd><p>set word in matrix from start to end coordinates 
+after checking validity of coordinates</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="charmat.CharMat.set_word">
+<tt class="descname">set_word</tt><big>(</big><em>word</em>, <em>(x_start</em>, <em>y_start)</em>, <em>(x_end</em>, <em>y_end)</em><big>)</big><a class="headerlink" href="#charmat.CharMat.set_word" title="Permalink to this definition">¶</a></dt>
+<dd><p>set word in matrix from start to end coordinates 
+after checking validity of coordinates</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="charmat.CharMat.term_display">
+<tt class="descname">term_display</tt><big>(</big><big>)</big><a class="headerlink" href="#charmat.CharMat.term_display" title="Permalink to this definition">¶</a></dt>
+<dd><p>display matrix on terminal</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="modules.html"
+                        title="previous chapter">List of Modules</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="word_list.html"
+                        title="next chapter">wordlist module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/charmat.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="word_list.html" title="wordlist module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="List of Modules"
+             >previous</a> |</li>
+        <li><a href="index.html">Word-Puzzle 1.0.1 documentation</a> &raquo;</li>
+          <li><a href="modules.html" >List of Modules</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Pinkesh Barsopia, Venkhat V.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
