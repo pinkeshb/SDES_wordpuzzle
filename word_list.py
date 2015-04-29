@@ -41,7 +41,7 @@ class word_list(object):
 		if level==1:
 			self.set_position1()
 		if level==2:
-			self.set_position()
+			self.set_position1()
 	
 	def set_position(self):
 		'''generates the postions for the words
