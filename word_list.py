@@ -39,7 +39,7 @@ class word_list(object):
 		if level==0:
 			self.set_position()
 		if level==1:
-			self.set_position()
+			self.set_position1()
 		if level==2:
 			self.set_position()
 	
@@ -94,6 +94,120 @@ class word_list(object):
 			self.success=True
 		return matrix
 			#it will stay false, if 20 itearaions had failed for a word
+
+	def set_position1(self):
+		'''generates the postions for the words with overlap
+		''' 
+		temp_list=[]#stores [word, word_len] eg. [cat,3]
+		i1=0
+		for i in self.words:
+			temp_list.append([])
+			temp_list[i1]=[i,len(i)]
+			i1+=1
+		temp_list.sort(key=itemgetter(1), reverse=True)#sort the words in decreasing order of length
+		direction_inc=[[-1,0],[-1,1],[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1]]
+		first_word_dir=[[2,4],[4,6],[6,0],[0,2]]# possible directions for the respective quadrant 
+		#Ignoring diagnol directions
+		second_word_dir=[[2,3,4],[4,5,6],[6,7,0],[0,1,2]]# possible directions for all words except the first one for the respective quadrant
+		quad_start=[[0,0],[0,self.matrix_size-1],[self.matrix_size-1,self.matrix_size-1],[self.matrix_size-1,0]]
+		matrix=[]# matrix will be filled with 1's , wherever words are fitted
+		for i2 in range(self.matrix_size):
+			matrix.append(self.matrix_size*[0])
+		# for First longest word, different processing
+		r1_quad=random.randrange(0,4)
+		r1_dir=random.randrange(0,2)
+		self.words=[]
+		self.length=[]
+		self.position.append(quad_start[r1_quad])
+		self.direction.append(first_word_dir[r1_quad][r1_dir])
+		self.words.append(temp_list[0][0])
+		self.length.append(temp_list[0][1])
+		matrix=matrix_superimpose(matrix,self.position[0],direction_inc[self.direction[0]],self.length[0])
+		# from second word onwards
+		i3=1
+		while i3<self.count:
+			current_success=0
+			itera=0
+
+			if i3+1<self.count:
+				word1=temp_list[i3][0]
+				word2=temp_list[i3+1][0]
+				common_letters=list(set(word1) & set(word2))
+				if len(common_letters)>0:
+					char=common_letters[0]
+					offset1=word1.index(char)
+					offset2=word2.index(char)
+					while(current_success==0 and itera<=40):
+						x,y=generate_start_pos(self.matrix_size)
+						current_quad=find_quadrant(x,y,self.matrix_size)
+						r2_dir=random.randrange(0,3)
+						current_dir=second_word_dir[current_quad][r2_dir]
+						current_success1=word_hit_or_miss(x,y,temp_list[i3][1],direction_inc[current_dir],matrix)
+						if current_success1 != True:
+							itera+=1
+							continue
+						x_off,y_off=convert_pos_inc(x,y,offset1,current_dir,self.matrix_size)# go to the overlap position in word1 by offset qty 
+						if x_off==-1:# here it wont happen
+							#print "word1 out of bound"
+							itera+=1
+							continue
+
+						temp=range(3)
+						temp.remove(r2_dir)# just creating a temp list with 0,1,2,3 and removing the already chosen direction for first word
+						current_success2=False # bcos of continue , inside loop, it may not even be intialized
+						for r2_dir2 in temp:
+
+							current_dir2=second_word_dir[current_quad][r2_dir2]
+							x2,y2=convert_pos_dec(x_off,y_off,offset2,current_dir2,self.matrix_size)# revert back to the position, where word2 would begin, in the guven direction
+							if x2==-1:
+								#print "word2 out of bound"
+								continue # this direction wont work. goes ot of bound
+							current_success2=word_hit_or_miss(x2,y2,len(word2),direction_inc[current_dir2],matrix)
+							# this word_hitor misss may make the indices out of bound
+							if current_success2==True:
+								break
+						if current_success2==True:
+							current_success=True
+						else:
+							itera+=1
+							continue
+					if current_success==0: #if all 20 start positions fail, then words list can't be fit into this matrix
+						print "Not  possible"
+						break			
+					self.position.append([x,y])
+					self.direction.append(current_dir)
+					self.words.append(temp_list[i3][0])
+					self.length.append(temp_list[i3][1])
+					matrix=matrix_superimpose(matrix,self.position[i3],direction_inc[self.direction[i3]],self.length[i3])
+					self.position.append([x2,y2])
+					self.direction.append(current_dir2)
+					self.words.append(temp_list[i3+1][0])
+					self.length.append(temp_list[i3+1][1])
+					matrix=matrix_superimpose(matrix,self.position[i3+1],direction_inc[self.direction[i3+1]],self.length[i3+1])
+					i3+=2
+
+			if current_success==0:
+				while(current_success==0 and itera<=20):
+					x,y=generate_start_pos(self.matrix_size)
+					current_quad=find_quadrant(x,y,self.matrix_size)
+					r2_dir=random.randrange(0,3)
+					current_dir=second_word_dir[current_quad][r2_dir]
+					current_success=word_hit_or_miss(x,y,temp_list[i3][1],direction_inc[current_dir],matrix)
+					itera+=1
+
+
+				if current_success==0: #if all 20 start positions fail, then words list can't be fit into this matrix
+					break	
+				
+				self.position.append([x,y])
+				self.direction.append(current_dir)
+				self.words.append(temp_list[i3][0])
+				self.length.append(temp_list[i3][1])
+				matrix=matrix_superimpose(matrix,self.position[i3],direction_inc[self.direction[i3]],self.length[i3])
+				i3+=1
+		if len(self.words)==self.count:
+			self.success=True
+		return matrix
 	def get_start_end_xy(self,i):
 	    """returns start and end coordinates of i_th word in words(list)"""
 	    direction_inc=[[-1,0],[-1,1],[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1]]
@@ -115,6 +229,23 @@ def find_quadrant(x,y,n):
 			return 3
 		else:
 			return 2
+def convert_pos_dec(x,y,offset, curr_dir,size):
+	direction_inc=[[-1,0],[-1,1],[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1]]
+	for i in range(offset):
+		x=x-direction_inc[curr_dir][0]
+		y=y-direction_inc[curr_dir][1]
+	if (x <0 or x >=size) or (y <0 or y >=size):
+		x,y=-1,-1
+	return x,y
+
+def convert_pos_inc(x,y,offset, curr_dir,size):
+	direction_inc=[[-1,0],[-1,1],[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1]]
+	for i in range(offset):
+		x=x+direction_inc[curr_dir][0]
+		y=y+direction_inc[curr_dir][1]
+	if (x <0 or x >=size) or (y <0 or y >=size):
+		x,y=-1,-1
+	return x,y
 
 
 def word_hit_or_miss(x,y,l,inc,matrix):
@@ -125,7 +256,7 @@ def word_hit_or_miss(x,y,l,inc,matrix):
 	flag=0
 	n=len(matrix)
 	for i1 in xrange(l):
-		if i>=n or j>=n or matrix[i][j]==1:
+		if i>=n or j>=n or i<0 or j<0 or  matrix[i][j]==1: # this worked eralier , without issue of going out bound in <0. Bcos dircetions, acc to quad, are such a way that, it wont go below bound
 			flag=1
 			break
 		else:

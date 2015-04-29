@@ -8,10 +8,12 @@ class ExamplePanel(wx.Panel):
         self.dictionary="Animals"# default values
         self.grid_size=12
         self.app=app
+        
         self.quote = wx.StaticText(self, label="Hi !! You have to find a set of english words embedded in n by n matrix of characters.", pos=(20, 30), size=(375,300), style=wx.TE_MULTILINE | wx.TE_READONLY )
         # A button
         self.button =wx.Button(self, label="Start", pos=(150, 320))
         self.Bind(wx.EVT_BUTTON, self.OnClick,self.button)
+        
         # the combobox Control
         self.sampleList = ['Animals', 'Car Brands']
         self.lblhear = wx.StaticText(self, label="Choose the Topic", pos=(20, 90))
@@ -39,13 +41,16 @@ class ExamplePanel(wx.Panel):
         
     def EvtComboBox1(self, event):
         temp=event.GetString()
-        self.grid_size=int(temp[0])
+        if temp=="8 x 8":
+            self.grid_size=8
+        else:
+            self.grid_size=12
 
     
     def OnClick(self,event):
         
         self.app.ExitMainLoop()
-        self.Close(True)
+        #self.parent1.Close(True)
         
     
 class myFrame(wx.Frame):
@@ -54,7 +59,8 @@ class myFrame(wx.Frame):
         wx.Frame.__init__(self, parent, title=window_name)
         
         self.mypanel=ExamplePanel(self,app)
-    def OnExit(self):
+        
+    def OnExit(self):# could not rectify clsing the frame problem
         self.Close(True)
 
 
@@ -64,7 +70,7 @@ if __name__=='__main__':
     #panel = ExamplePanel(frame)
     frame.Show()
     app.MainLoop()
-    frame.Close(True)
+    #frame.Close()
     print frame.mypanel.level, frame.mypanel.dictionary, frame.mypanel.grid_size
     
 
@@ -73,6 +79,6 @@ def start_setup():
     frame = myFrame(None,"Word Search Puzzle",app)
     frame.Show()
     app.MainLoop()
-    frame.Close(True)
-    return frame.mypanel.level, frame.mypanel.dictionary, frame.mypasnel.grid_size
+    #frame.Close()
+    return frame.mypanel.level, frame.mypanel.dictionary, frame.mypanel.grid_size
     

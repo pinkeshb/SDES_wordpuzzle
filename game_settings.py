@@ -1,5 +1,5 @@
 class game_settings(object):
-	def __init__(self,level=0,dictionary="Animals",grid=8):
+	def __init__(self,level=0,dictionary="Animals",grid=12):
 		self.level=level
 		self.dictionary=dictionary
 		self.matrix_size=grid
