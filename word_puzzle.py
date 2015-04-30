@@ -21,6 +21,6 @@ while(True):
     if word_list1.success == True:
         break
 char_mat.set_all_words(word_list1)
-char_mat.fill_characters_randomly(word_list1.words, game_set.level)
+char_mat.fill_characters_randomly(word_list1.words,level)
 gstat = gamestatus.GameStatus(word_list1, char_mat)
 puzzlegui.start(game_set, gstat, level)

@@ -7,8 +7,8 @@ import math
 class TestwordList(unittest.TestCase):
 
     def setUp(self):
-        self.sport = wl.word_list(2, 3, 6)
-        self.sport.single_fetch_word("words_out.txt")
+        self.sport = wl.word_list(3, 2, 6)
+        self.sport.single_fetch_word("Animals")
 
     def tearDown(self):
         pass
@@ -49,7 +49,6 @@ class TestwordHitOrMiss(unittest.TestCase):
 class TestMatrix_superimpose(unittest.TestCase):
 
     def setUp(self):
-        *
         self.matrix = [[0, 1, 1], [0, 0, 0], [1, 1, 0]]
         pass
 
@@ -58,8 +57,7 @@ class TestMatrix_superimpose(unittest.TestCase):
 
     def test_mat_superimpose(self):
 
-        self.assertEqual(wl.matrix_superimpose(
-            self.matrix, [1, 1], [0, -1], 2), [[0, 1, 1], [1, 1, 0], [1, 1, 0]])
+        self.assertEqual(wl.matrix_superimpose(self.matrix, [1, 1], [0, -1], 2), [[0, 1, 1], [1, 1, 0], [1, 1, 0]])
 
     def test_mat_superimpose(self):
 
@@ -73,8 +71,8 @@ class TestwordList_setPosition(unittest.TestCase):
         self.inc = [[-1, 0], [-1, 1], [0, 1], [1, 1],
                     [1, 0], [1, -1], [0, -1], [-1, -1]]
         while(True):
-            self.sport = wl.word_list(2, 3, 6)
-            self.sport.single_fetch_word("words_out.txt")
+            self.sport = wl.word_list(3, 2, 6)
+            self.sport.single_fetch_word("Animals")
             self.matrix = self.sport.set_position()
 
             if self.sport.success == True:
@@ -98,7 +96,9 @@ class TestwordList_setPosition(unittest.TestCase):
             i, j = i + self.inc[dir1][0], j + self.inc[dir1][1]
 
     def test_set_positions_no_intersection1(self):
-        ''' if it does notoverlap, sum of 1's in matrix is equal to the sum of lengths of words'''
+        ''' if it does notoverlap, sum of 1's in matrix is equal to the sum of 
+        lengths of words
+        '''
         sum1 = 0
         for i in xrange(self.sport.matrix_size):
             sum1 += sum(self.matrix[i])
@@ -114,8 +114,8 @@ class TestwordList_setPosition1(unittest.TestCase):
         while(True):
             # no. of words, len, matrix size #Error comes, if legth of word is
             # bigger than the size of matrix in line 62
-            self.sport = wl.word_list(8, 6, 6)
-            self.sport.single_fetch_word("words_out.txt")
+            self.sport = wl.word_list(6, 8, 6)
+            self.sport.single_fetch_word("Animals")
             self.matrix = self.sport.set_position()
             iter1 += 1
             if self.sport.success == True:
@@ -128,7 +128,9 @@ class TestwordList_setPosition1(unittest.TestCase):
         pass
 
     def test_set_positions_no_intersection1(self):
-        ''' if it does notoverlap, sum of 1's in matrix is equal to the sum of lengths of words'''
+        ''' if it does notoverlap, sum of 1's in matrix is equal to 
+        the sum of lengths of words
+        '''
         if self.sport.success == False:
             return
         sum1 = 0
