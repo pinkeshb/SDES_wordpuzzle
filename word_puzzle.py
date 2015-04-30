@@ -20,7 +20,20 @@ while(True):
     print word_list1.direction
     if word_list1.success == True:
         break
+    else:
+        pass
+
 char_mat.set_all_words(word_list1)
-char_mat.fill_characters_randomly("z")
+if level != 2:
+    char_mat.fill_characters_randomly("z")
+else:
+    charlist = "".join(word_list1.words)
+    charset = set(charlist)
+    charlist = list(charset)
+    stringchar = "".join(charlist).upper()
+    char_mat.fill_characters_randomly(stringchar.lower())
+
+
 gstat = gamestatus.GameStatus(word_list1, char_mat)
-puzzlegui.start(gstat)
+puzzlegui.start(game_set,gstat, level)
+
