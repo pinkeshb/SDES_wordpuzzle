@@ -9,13 +9,13 @@ GREEN = (0, 255,   0)
 BLUE = (0,   0, 255)
 GRAY = (200, 200, 200)
 LEFT = 1
-letter_block_size = 26
+letter_block_size = 35
 Word_block_size = 100
 w_start, w_end = (0, 0), (0, 0)
 w_start, w_end = (0, 0), (0, 0)
 
 
-def start(gstat):  # Gset,gstat
+def start(gsetting,gstat, level):  # Gset,gstat
     char_mat = gstat.char_mat
 
     # matrix size
@@ -51,6 +51,7 @@ def start(gstat):  # Gset,gstat
     total_seconds = start_time - (frame_count // frame_rate)
     start = False
     while True:  # main game loop
+        # Controller Implementation
         for event in pygame.event.get():
             # mouse drag and select
             if not gstat.times_up and not gstat.success:
@@ -65,6 +66,8 @@ def start(gstat):  # Gset,gstat
                         current_end = P_1
 
                         # print P_1
+
+                # mouse motion and sticky positioning
                 if start and event.type == pygame.MOUSEMOTION:
                     if valid(event.pos, width_mat, hight_mat, width_frame,
                              hight_frame):
@@ -72,6 +75,8 @@ def start(gstat):  # Gset,gstat
                                       letter_block_size)
                         current_start = P_1
                         current_end = P_j
+
+                # detecting end of the selection
                 if start and event.type == pygame.MOUSEBUTTONUP and \
                         event.button == LEFT:
                     if valid(event.pos, width_mat, hight_mat, width_frame,
@@ -89,58 +94,63 @@ def start(gstat):  # Gset,gstat
     # ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT
     # --- Timer going up ---
     # Calculate total seconds
+
+    # VIEW implementation
         draw_lines(char_mat, DISPLAYSURF)
         draw_chars(char_mat, DISPLAYSURF)
-        draw_words(gstat.char_mat, gstat.word_list, DISPLAYSURF)
+
+        if level != 2:
+            draw_words(gstat.char_mat, gstat.word_list, DISPLAYSURF)
         y = 0
         for w in gstat.word_list.words:
             if gstat.word_list.found[y]:
                 w_start, w_end = gstat.word_list.get_start_end_xy(y)
-                highlight_char(DISPLAYSURF, (w_start[0] * letter_block_size + 
-                    width_frame, w_start[1] * letter_block_size + hight_frame),
-                    GREEN)
-                highlight_char(DISPLAYSURF, (w_end[0] * letter_block_size + 
-                    width_frame, w_end[1] * letter_block_size + hight_frame), 
-                    GREEN)
-                pygame.draw.line(DISPLAYSURF, GREEN, (w_start[0] * 
-                    letter_block_size + width_frame + letter_block_size / 2, 
-                    w_start[1] * letter_block_size + letter_block_size / 2 + 
-                    hight_frame), (w_end[0] * letter_block_size + width_frame +
-                     letter_block_size / 2, w_end[1] * letter_block_size + 
-                     letter_block_size / 2 + hight_frame))
+                highlight_char(DISPLAYSURF, (w_start[0] * letter_block_size +
+                                             width_frame, w_start[1] * letter_block_size + hight_frame),
+                               GREEN)
+                highlight_char(DISPLAYSURF, (w_end[0] * letter_block_size +
+                                             width_frame, w_end[1] * letter_block_size + hight_frame),
+                               GREEN)
+                pygame.draw.line(DISPLAYSURF, GREEN, (w_start[0] *
+                                                      letter_block_size + width_frame +
+                                                      letter_block_size / 2,
+                                                      w_start[1] * letter_block_size + letter_block_size / 2 +
+                                                      hight_frame), (w_end[0] * letter_block_size + width_frame +
+                                                                     letter_block_size / 2, w_end[1] * letter_block_size +
+                                                                     letter_block_size / 2 + hight_frame))
             y = y + 1
 
         if start:
             w_start, w_end = get_sticky(current_start, current_end)
-            highlight_char(DISPLAYSURF, (w_start[0] * letter_block_size + 
-                width_frame, w_start[1] * letter_block_size + hight_frame),RED)
+            highlight_char(DISPLAYSURF, (w_start[0] * letter_block_size +
+                                         width_frame, w_start[1] * letter_block_size + hight_frame), RED)
 
-            highlight_char(DISPLAYSURF, (w_end[0] * letter_block_size + 
-                width_frame, w_end[1] * letter_block_size + hight_frame), RED)
-            pygame.draw.line(DISPLAYSURF, RED, (w_start[0] * letter_block_size 
-                + width_frame + letter_block_size / 2, w_start[1] * 
-                letter_block_size + letter_block_size / 2 + hight_frame), 
-                (w_end[0] * letter_block_size + width_frame + letter_block_size
-                / 2, w_end[1] * letter_block_size + letter_block_size / 2 + 
-                hight_frame))
+            highlight_char(DISPLAYSURF, (w_end[0] * letter_block_size +
+                                         width_frame, w_end[1] * letter_block_size + hight_frame), RED)
+            pygame.draw.line(DISPLAYSURF, RED, (w_start[0] * letter_block_size
+                                                + width_frame + letter_block_size / 2, w_start[1] *
+                                                letter_block_size + letter_block_size / 2 + hight_frame),
+                             (w_end[0] * letter_block_size + width_frame + letter_block_size
+                              / 2, w_end[1] * letter_block_size + letter_block_size / 2 +
+                              hight_frame))
 
         if gstat.success:
             # display success and time left
             textSurfaceObj = fontObjMessage.render("You Won!", True, BLUE)
             textRectObj = textSurfaceObj.get_rect()
-            textRectObj.center = (letter_block_size * (3 / 2.0 + char_mat.n 
-                / 2), letter_block_size * (3 / 2.0 + char_mat.n / 2))
+            textRectObj.center = (letter_block_size * (3 / 2.0 + char_mat.n
+                                                       / 2), letter_block_size * (3 / 2.0 + char_mat.n / 2))
             DISPLAYSURF.blit(textSurfaceObj, textRectObj)
 
         if total_seconds == 0:
             gstat.check_word((-1, -1), (-1, -1))
-            print "timesup"
-            print gstat.times_up
+            # print "timesup"
+            # print gstat.times_up
         if gstat.times_up:
             textSurfaceObj = fontObjMessage.render("Time's Up!", True, BLUE)
             textRectObj = textSurfaceObj.get_rect()
-            textRectObj.center = (letter_block_size * (3 / 2.0 + char_mat.n 
-                / 2), letter_block_size * (3 / 2.0 + char_mat.n / 2))
+            textRectObj.center = (letter_block_size * (3 / 2.0 + char_mat.n
+                                                       / 2), letter_block_size * (3 / 2.0 + char_mat.n / 2))
             DISPLAYSURF.blit(textSurfaceObj, textRectObj)
 
         # --- Timer going down ---
@@ -164,6 +174,11 @@ def start(gstat):  # Gset,gstat
         text = font.render(output_string, True, GREEN)
 
         DISPLAYSURF.blit(text, [letter_block_size, 0])
+        output_string = "Restart"
+        # Blit to the screen
+        text = font.render(output_string, True, GREEN)
+
+        DISPLAYSURF.blit(text, [letter_block_size * char_mat.n + 1, 0])
         output_string = "Score: " + str(gstat.score)
 
         # Blit to the screen
@@ -182,20 +197,24 @@ def start(gstat):  # Gset,gstat
 
 
 def valid((mousex, mousey), width_mat, hight_mat, width_frame, hight_frame):
+    """checks if mouse click in inside matrix"""
     if width_frame < mousex < width_mat + width_frame and hight_frame < \
-        mousey < hight_mat + hight_frame:
+            mousey < hight_mat + hight_frame:
         return True
     else:
         return False
 
 
 def convert((mousex, mousey), width_frame, hight_frame, letter_block_size):
+    """converts pixel coordinates to matrix coordinates"""
     i = int((mousex - width_frame) / letter_block_size)
     j = int((mousey - hight_frame) / letter_block_size)
     return (i, j)
 
 
 def get_sticky(current_start, current_end):
+    """converts current matrix c0-ordinates to sticky(valid) matrix coordinates
+    start and end"""
     w_start = current_start
     norm_end_x = current_end[0] - current_start[0]
     norm_end_y = current_start[1] - current_end[1]
@@ -236,17 +255,19 @@ def get_sticky(current_start, current_end):
 
 
 def draw_lines(char_mat, DISPLAYSURF):
+    """Draws empty matrix on DISPLAYSURF"""
     for i in range(char_mat.n - 1 + 2):
-        pygame.draw.line(DISPLAYSURF, GRAY, (letter_block_size * (i + 1), 
-            letter_block_size),(letter_block_size * (i + 1), letter_block_size 
-            * (char_mat.n + 1)))
+        pygame.draw.line(DISPLAYSURF, GRAY, (letter_block_size * (i + 1),
+                                             letter_block_size), (letter_block_size * (i + 1), letter_block_size
+                                                                  * (char_mat.n + 1)))
     for i in range(char_mat.n - 1 + 2):
-        pygame.draw.line(DISPLAYSURF, GRAY, (letter_block_size, 
-            letter_block_size * (i + 1)), (letter_block_size * 
-            (char_mat.n + 1), letter_block_size * (i + 1)))
+        pygame.draw.line(DISPLAYSURF, GRAY, (letter_block_size,
+                                             letter_block_size * (i + 1)), (letter_block_size *
+                                                                            (char_mat.n + 1), letter_block_size * (i + 1)))
 
 
 def draw_chars(char_mat, DISPLAYSURF):
+    """Draws characters in matrix on DISPLAYSURF"""
     fontObj = pygame.font.Font(
         'freesansbold.ttf', int(letter_block_size * 0.5))
     for i in range(char_mat.n):
@@ -254,14 +275,15 @@ def draw_chars(char_mat, DISPLAYSURF):
             c = char_mat.get_char((i, j))
             textSurfaceObj = fontObj.render(c, True, BLUE)
             textRectObj = textSurfaceObj.get_rect()
-            textRectObj.center = (letter_block_size * (3 / 2.0 + i), 
-                letter_block_size * (3 / 2.0 + j))
+            textRectObj.center = (letter_block_size * (3 / 2.0 + i),
+                                  letter_block_size * (3 / 2.0 + j))
             DISPLAYSURF.blit(textSurfaceObj, textRectObj)
 
 
 def draw_words(char_mat, word_list, DISPLAYSURF):
+    """Draws words on DISPLAYSURF"""
     fontObjwords = pygame.font.Font(
-        'freesansbold.ttf', int(letter_block_size * 0.75))
+        'freesansbold.ttf', int(letter_block_size * 0.6))
     y = 0
     for w in word_list.words:
         if word_list.found[y]:
@@ -270,16 +292,17 @@ def draw_words(char_mat, word_list, DISPLAYSURF):
             colour_word = BLACK
         textSurfaceObj = fontObjwords.render(w, True, colour_word)
         textRectObj = textSurfaceObj.get_rect()
-        textRectObj.center = (letter_block_size * (char_mat.n + 3), 
-            letter_block_size * (3 / 2.0 + y))
+        textRectObj.center = (letter_block_size * (char_mat.n + 3),
+                              letter_block_size * (3 / 2.0 + y))
         DISPLAYSURF.blit(textSurfaceObj, textRectObj)
         y = y + 1
 
 
 def highlight_char(DISPLAYSURF, (x, y), high_colour):
+    """highlights the character at (x,y) with given high_colour"""
     s = pygame.Surface((letter_block_size, letter_block_size))
     s.fill(WHITE)
     pygame.draw.circle(s, high_colour, (letter_block_size /
-                       2, letter_block_size / 2), letter_block_size / 2, 0)
+                                        2, letter_block_size / 2), letter_block_size / 2, 0)
     s.set_alpha(100)
     DISPLAYSURF.blit(s, (x, y))

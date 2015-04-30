@@ -1,6 +1,4 @@
 from random import randint
-
-
 DEFAULT_SIZE = 15
 
 
@@ -29,7 +27,7 @@ class CharMat(object):
             if y_start < y_end:
                 for i in range(y_start, y_end + 1):
                     word.append(self.get_char((x_start, i)))
-                print "".join(word), "charm"
+                print "".join(word)
                 return "".join(word)
 
             else:
