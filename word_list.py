@@ -21,7 +21,7 @@ class word_list(object):
         and from them randomly picks eg.10 no. of words. 
         Input: a file name 
         return: set of words in a list <= given max length  '''
-        fin = open(fileinput)
+        fin = open(fileinput+".txt")
         countstring = fin.next().strip('\n')
         count = map(int, countstring.split())
         countnum = sum(count[:self.max_length])

@@ -73,7 +73,7 @@ class CharMat(object):
             if abs(y_start - y_end) == (len(word) - 1):
                 for i in range(len(word)):
                     self.char_array[x_start + (y_start + i * (y_end - y_start)
-                                    / abs(y_end - y_start)) * self.n] = word[i]
+                                               / abs(y_end - y_start)) * self.n] = word[i]
                 return
             else:
                 raise ValueError
@@ -97,10 +97,17 @@ class CharMat(object):
                 (y_start + i * (y_end - y_start) / abs(y_end - y_start))
                 * self.n] = word[i]
 
-    def fill_characters_randomly(self, string):
+    def fill_characters_randomly(self, word_list, level):
         """fills all the spaces in matrix with randomly selected 
         characters form string
         """
+        string = "abcdefghijklmnopqrstuvxyz"
+        if level == 2:
+            charlist = "".join(word_list.words)
+            charset = set(charlist)
+            charlist = list(charset)
+            string = "".join(charlist)
+        string=string.upper()
         for i in range(self.n * self.n):
             if self.char_array[i] == ' ':
                 self.char_array[i] = string[randint(0, len(string) - 1)]
