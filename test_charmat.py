@@ -77,7 +77,7 @@ class TestCharMatClass(unittest.TestCase):
 
     def test_fill_characters_randomly(self):
         char_mat =  charmat.CharMat()
-        char_mat.fill_characters_randomly("asjf")
+        char_mat.fill_characters_randomly(["asjf"],0)
         self.assertTrue(not(" " in char_mat.char_array))
 
     def test_get_char(self):

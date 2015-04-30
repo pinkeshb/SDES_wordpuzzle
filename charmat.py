@@ -103,7 +103,7 @@ class CharMat(object):
         """
         string = "abcdefghijklmnopqrstuvxyz"
         if level == 2:
-            charlist = "".join(word_list.words)
+            charlist = "".join(word_list)
             charset = set(charlist)
             charlist = list(charset)
             string = "".join(charlist)
