@@ -1,6 +1,10 @@
 import wx
+
+
 class ExamplePanel(wx.Panel):
+    
     def __init__(self, parent):
+        
         wx.Panel.__init__(self, parent)
         self.quote = wx.StaticText(self, label="Hi !! You have to find a set of english words embedded in n by n matrix of characters.", pos=(20, 30), size=(375,300), style=wx.TE_MULTILINE | wx.TE_READONLY )
         # A multiline TextCtrl - This is here to show how the events work in this program, don't pay too much attention to it
@@ -16,7 +20,6 @@ class ExamplePanel(wx.Panel):
         # the combobox Control
         self.sampleList = ['Animals', 'FootBall Stars', 'Movie Names']
         self.lblhear = wx.StaticText(self, label="Choose the Topic", pos=(20, 90))
-
         self.edithear = wx.ComboBox(self, pos=(20, 120), size=(150, -1), choices=self.sampleList, style=wx.CB_DROPDOWN)# in pos(column,row)
         self.Bind(wx.EVT_COMBOBOX, self.EvtComboBox, self.edithear)
         #self.Bind(wx.EVT_TEXT, self.EvtText,self.edithear)
