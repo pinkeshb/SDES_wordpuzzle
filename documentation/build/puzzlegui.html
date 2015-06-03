@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Word-Puzzle 1.0.1 documentation" href="index.html" />
     <link rel="up" title="List of Modules" href="modules.html" />
-    <link rel="next" title="optiongui module" href="option_gui.html" />
+    <link rel="next" title="option_gui module" href="options_gui.html" />
     <link rel="prev" title="gamesettings module" href="gamesettings.html" /> 
   </head>
   <body>
@@ -39,7 +39,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="option_gui.html" title="optiongui module"
+          <a href="options_gui.html" title="option_gui module"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="gamesettings.html" title="gamesettings module"
@@ -59,42 +59,50 @@
 <dl class="function">
 <dt id="puzzlegui.convert">
 <tt class="descclassname">puzzlegui.</tt><tt class="descname">convert</tt><big>(</big><em>(mousex</em>, <em>mousey)</em>, <em>width_frame</em>, <em>hight_frame</em>, <em>letter_block_size</em><big>)</big><a class="headerlink" href="#puzzlegui.convert" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>converts pixel coordinates to matrix coordinates</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="puzzlegui.draw_chars">
 <tt class="descclassname">puzzlegui.</tt><tt class="descname">draw_chars</tt><big>(</big><em>char_mat</em>, <em>DISPLAYSURF</em><big>)</big><a class="headerlink" href="#puzzlegui.draw_chars" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Draws characters in matrix on DISPLAYSURF</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="puzzlegui.draw_lines">
 <tt class="descclassname">puzzlegui.</tt><tt class="descname">draw_lines</tt><big>(</big><em>char_mat</em>, <em>DISPLAYSURF</em><big>)</big><a class="headerlink" href="#puzzlegui.draw_lines" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Draws empty matrix on DISPLAYSURF</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="puzzlegui.draw_words">
 <tt class="descclassname">puzzlegui.</tt><tt class="descname">draw_words</tt><big>(</big><em>char_mat</em>, <em>word_list</em>, <em>DISPLAYSURF</em><big>)</big><a class="headerlink" href="#puzzlegui.draw_words" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Draws words on DISPLAYSURF</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="puzzlegui.get_sticky">
 <tt class="descclassname">puzzlegui.</tt><tt class="descname">get_sticky</tt><big>(</big><em>current_start</em>, <em>current_end</em><big>)</big><a class="headerlink" href="#puzzlegui.get_sticky" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>converts current matrix c0-ordinates to sticky(valid) matrix coordinates
+start and end</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="puzzlegui.highlight_char">
 <tt class="descclassname">puzzlegui.</tt><tt class="descname">highlight_char</tt><big>(</big><em>DISPLAYSURF</em>, <em>(x</em>, <em>y)</em>, <em>high_colour</em><big>)</big><a class="headerlink" href="#puzzlegui.highlight_char" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>highlights the character at (x,y) with given high_colour</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="puzzlegui.start">
-<tt class="descclassname">puzzlegui.</tt><tt class="descname">start</tt><big>(</big><em>gstat</em><big>)</big><a class="headerlink" href="#puzzlegui.start" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">puzzlegui.</tt><tt class="descname">start</tt><big>(</big><em>gsetting</em>, <em>gstat</em>, <em>level</em><big>)</big><a class="headerlink" href="#puzzlegui.start" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="puzzlegui.valid">
 <tt class="descclassname">puzzlegui.</tt><tt class="descname">valid</tt><big>(</big><em>(mousex</em>, <em>mousey)</em>, <em>width_mat</em>, <em>hight_mat</em>, <em>width_frame</em>, <em>hight_frame</em><big>)</big><a class="headerlink" href="#puzzlegui.valid" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>checks if mouse click in inside matrix</p>
+</dd></dl>
 
 </div>
 
@@ -108,8 +116,8 @@
   <p class="topless"><a href="gamesettings.html"
                         title="previous chapter">gamesettings module</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="option_gui.html"
-                        title="next chapter">optiongui module</a></p>
+  <p class="topless"><a href="options_gui.html"
+                        title="next chapter">option_gui module</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/puzzlegui.txt"
@@ -142,7 +150,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="option_gui.html" title="optiongui module"
+          <a href="options_gui.html" title="option_gui module"
              >next</a> |</li>
         <li class="right" >
           <a href="gamesettings.html" title="gamesettings module"
